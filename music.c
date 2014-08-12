@@ -13,9 +13,27 @@ int musicMakeNote(notename name, int octave) {
   return name + octave * 12;
 }
 
+int sizeOfScale(musicMode mode) {
+  switch (mode){
+    case ionian:
+    case aeolian:
+    {
+      return 7;
+      break;
+    }
+    case pentatonicMinor:
+    {
+      return 5;
+    }
+  }
+  return 0;
+}
+
 // TODO: create midiNote alias to differentiate between
+// TODO: create and allocate array within musicMakeScale function
 void musicMakeScale(notename root, musicMode mode, int * notes) {
   musicSteps * sequence;
+
   switch (mode){
     case ionian:
     {
@@ -29,11 +47,19 @@ void musicMakeScale(notename root, musicMode mode, int * notes) {
       sequence = aeolianSequence;
       break;
     }
+    case pentatonicMinor:
+    {
+      musicSteps pentatonicMinorSequence[5] = {T+S,T,T,T+S,T};
+      sequence = pentatonicMinorSequence;
+      break;
+    }
   }
+
   notes[0] = musicMakeMiddleNote(root);
-  for (int i = 1; i < 7; i++) {
+  for (int i = 1; i < sizeOfScale(mode); i++) {
     notes[i] = notes[i-1] + sequence[i-1];
   }
+
 }
 
 notename midiNoteName(int note) {
@@ -45,7 +71,7 @@ const char * stringFromNotename(notename note) {
 }
 
 // TODO: create string output for testing
-const char * midiNoteAsString(int note) {
+const char * stringFromMIDINote(int note) {
   return stringFromNotename(midiNoteName(note));
 }
 
@@ -60,9 +86,12 @@ int main(int argc, char **argv) {
   int root = C;
   if (argc > 1) root = notenameFromString(argv[1]);
   
-  int notes[7];
-  musicMakeScale(root, aeolian, notes);
-  for (int i = 0; i < 7; i++) {
-    puts(midiNoteAsString(notes[i]));
+  musicMode mode = pentatonicMinor;
+  int count = sizeOfScale(mode);
+  int notes[count];
+  musicMakeScale(root, mode, notes);
+
+  for (int i = 0; i < count; i++) {
+    printf("%s\tdegree: %d\tnote: %d\n", stringFromMIDINote(notes[i]), i, notes[i]);
   }
 }

@@ -26,10 +26,14 @@ int musicMakeNote(notename name, int octave);
 // TODO: add pentatonic
 
 typedef enum {
+  // modern heptatonic modes 
   ionian = 0,
   major = 0,
-  aeolian = 1,
-  naturalMinor = 1
+  aeolian = 6, // tonic relative to major
+  naturalMinor = 6,
+  // pentatonic
+  // pentatonic = 7,
+  pentatonicMinor = 8
 } musicMode;
 
 typedef enum {
