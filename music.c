@@ -70,9 +70,14 @@ const char * stringFromNotename(notename note) {
   return noteDescriptions[note];
 }
 
-// TODO: create string output for testing
 const char * stringFromMIDINote(int note) {
   return stringFromNotename(midiNoteName(note));
+}
+
+void printNotes(int * notes, int count) { 
+  for (int i = 0; i < count; i++) {
+    printf("%s\tMIDI: %d\n", stringFromMIDINote(notes[i]), notes[i]);
+  }
 }
 
 notename notenameFromString(char *string) {
@@ -91,7 +96,5 @@ int main(int argc, char **argv) {
   int notes[count];
   musicMakeScale(root, mode, notes);
 
-  for (int i = 0; i < count; i++) {
-    printf("%s\tdegree: %d\tnote: %d\n", stringFromMIDINote(notes[i]), i, notes[i]);
-  }
+  printNotes(notes, count);
 }
