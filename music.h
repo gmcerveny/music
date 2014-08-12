@@ -45,6 +45,10 @@ typedef enum {
 
 void musicMakeScale(notename root, musicMode mode, int * notes);
 
+// chords
+
+void musicMakeChordFromKey(notename root, musicMode mode, int degree, int * notes);
+void musicMakeChordFromScale(int * scale, int size, int degree, int * chord);
 
 // duration
 
