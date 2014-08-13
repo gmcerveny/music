@@ -109,19 +109,20 @@ notename notenameFromString(char *string) {
   return -1;
 }
 
-int main(int argc, char **argv) {
-  int root = C;
-  if (argc > 1) root = notenameFromString(argv[1]);
-  
-  musicMode mode = naturalMinor;
-  int size = sizeOfScale(mode);
-  int scale[size];
-  musicMakeScale(root, mode, scale);
-  printNotes(scale, size);
+//int main(int argc, char **argv) {
+//  int root = C;
+//  if (argc > 1) root = notenameFromString(argv[1]);
+//  
+//  musicMode mode = naturalMinor;
+//  int size = sizeOfScale(mode);
+//  int scale[size];
+//  musicMakeScale(root, mode, scale);
+//  printNotes(scale, size);
+//
+//  int chord[3];
+//  for (int i = 1; i <= size; i++){
+//    musicMakeChordFromScale(scale, size, i, chord);
+//    printNotes(chord,3);
+//  }
+//}
 
-  int chord[3];
-  for (int i = 1; i <= size; i++){
-    musicMakeChordFromScale(scale, size, i, chord);
-    printNotes(chord,3);
-  }
-}
